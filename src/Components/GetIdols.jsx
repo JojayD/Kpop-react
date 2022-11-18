@@ -1,8 +1,18 @@
+import { data } from "autoprefixer";
 import React, { useContext } from "react";
 import { CreateInput } from "../Context/CreateInp";
 
 function GetIdols(props) {
-	const { input } = useContext(CreateInput);
+	const {
+		input,
+		setInput,
+		setObj,
+		obj,
+		toggle,
+		showField,
+		arrayObj,
+		setArrayObj,
+	} = useContext(CreateInput);
 
 	const options = {
 		method: "GET",
@@ -18,19 +28,45 @@ function GetIdols(props) {
 			options
 		)
 			.then((res) => res.json())
-			.then((data) => console.log(data))
+			.then((data) => {
+				console.log(data);
+				setInput("");
+				setObj(data);
+				toggle();
+			})
 			.catch((err) => console.log(err));
 	};
+
+	const results = [];
 
 	return (
 		<div>
 			<label>Get Idol</label>
 			<input
-        type="text"
+				type="text"
 				value={props.value}
 				onChange={props.handleClick}
 			/>
 			<button onClick={search}>Search</button>
+
+			<ul>
+				{showField &&
+					obj.data.forEach(function (currVal, index, arr) {
+						console.log(currVal);
+						console.log(arr[index]);
+						const currArray = arr[index];
+						Object.entries(currArray).map(([key, value]) => {
+							console.log(key, value);
+							return (
+								<div key={index}>
+									<h2>
+										{key}:{currArray[key]}{" "}
+									</h2>
+								</div>
+							);
+						});
+					})}
+			</ul>
 		</div>
 	);
 }

@@ -5,7 +5,10 @@ import GetIdols from "./Components/GetIdols";
 import { CreateInput } from "./Context/CreateInp";
 function App() {
 	const [input, setInput] = useState("");
+	const [obj, setObj] = useState({});
+  const [arrayObj, setArrayObj] = useState([])
 	const [showField, setField] = useState(false);
+	
 
 	const handleClick = (event) => {
 		const { value } = event.target;
@@ -14,9 +17,13 @@ function App() {
 	};
 
 
+	const toggle = ()=>{
+		setField(prevState => !prevState)
+	}
+
 	return (
 		<div>
-			<CreateInput.Provider value={{ input, setInput }}>
+			<CreateInput.Provider value={{ input, setInput, setObj, obj, toggle, showField }}>
 				<GetIdols
 					value={input}
 					handleClick={handleClick}
