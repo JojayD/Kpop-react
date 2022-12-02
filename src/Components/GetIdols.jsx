@@ -1,7 +1,8 @@
-import { data } from "autoprefixer";
 import React, { useContext } from "react";
 import { CreateInput } from "../Context/CreateInp";
-
+import classes from "./GetIdols.module.css";
+import Card from "./Card";
+import { Button } from "react-bootstrap";
 function GetIdols(props) {
 	const {
 		input,
@@ -37,36 +38,31 @@ function GetIdols(props) {
 			.catch((err) => console.log(err));
 	};
 
-	const results = [];
-
 	return (
-		<div>
-			<label>Get Idol</label>
-			<input
-				type="text"
-				value={props.value}
-				onChange={props.handleClick}
-			/>
-			<button onClick={search}>Search</button>
+		<div >
+			<div className={classes.container__input}>
+				<label>Get Idol</label>
+				<input
+					type="text"
+					value={props.value}
+					onChange={props.handleClick}
+				/>
+				<Button  onClick={search}>Search</Button >
+			</div>
 
-			<ul>
+
+			<div className={classes.card__container}>
 				{showField &&
-					obj.data.forEach(function (currVal, index, arr) {
-						console.log(currVal);
-						console.log(arr[index]);
-						const currArray = arr[index];
-						Object.entries(currArray).map(([key, value]) => {
-							console.log(key, value);
-							return (
-								<div key={index}>
-									<h2>
-										{key}:{currArray[key]}{" "}
-									</h2>
-								</div>
-							);
-						});
+					obj.data.map((d, key) => {
+						console.log(d);
+						return (
+							<Card
+								d={d}
+								key={key}
+							/>
+						);
 					})}
-			</ul>
+			</div>
 		</div>
 	);
 }
