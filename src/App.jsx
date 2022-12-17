@@ -7,7 +7,6 @@ import "bootstrap/dist/css/bootstrap.min.css";
 function App() {
 	const [input, setInput] = useState("");
 	const [obj, setObj] = useState({});
-	const [arrayObj, setArrayObj] = useState([]);
 	const [showField, setField] = useState(false);
 
 	const handleClick = (event) => {

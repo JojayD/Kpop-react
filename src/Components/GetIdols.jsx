@@ -39,7 +39,7 @@ function GetIdols(props) {
 	};
 
 	return (
-		<div >
+		<div className="content__container">
 			<div className={classes.container__input}>
 				<label>Get Idol</label>
 				<input
@@ -51,7 +51,7 @@ function GetIdols(props) {
 			</div>
 
 
-			<div className={classes.card__container}>
+			<div className={classes.cards__container}>
 				{showField &&
 					obj.data.map((d, key) => {
 						console.log(d);
