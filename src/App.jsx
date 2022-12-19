@@ -1,10 +1,11 @@
-import classes from './App.module.css'
+import classes from "./App.module.css";
 import { useState, useContext } from "react";
 import GetIdols from "./Components/GetIdols";
 import { CreateInput } from "./Context/CreateInp";
 import "bootstrap/dist/css/bootstrap.min.css";
+import { Route, Routes } from "react-router-dom";
 
-function App() {
+function App() { 
 	const [input, setInput] = useState("");
 	const [obj, setObj] = useState({});
 	const [showField, setField] = useState(false);
@@ -20,17 +21,27 @@ function App() {
 	};
 
 	return (
-		<div className={classes.app__container}>
-			<CreateInput.Provider
-				value={{ input, setInput, setObj, obj, toggle, showField }}
-			>
-				<GetIdols
-					value={input}
-					handleClick={handleClick}
-					setInput={setInput}
+		<>
+			<div className={classes.app__container}>
+				<CreateInput.Provider
+					value={{ input, setInput, setObj, obj, toggle, showField }}
+				>
+			<Routes>
+				<Route
+					path="/"
+					element={
+						<GetIdols
+							value={input}
+							handleClick={handleClick}
+							setInput={setInput}
+						/>
+					}
 				/>
-			</CreateInput.Provider>
-		</div>
+				
+			</Routes>
+				</CreateInput.Provider>
+			</div>
+		</>
 	);
 }
 

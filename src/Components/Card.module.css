@@ -3,5 +3,5 @@
   margin: 30px;
   padding: 15px;
   justify-self: stretch;
-  
+  overflow: auto;
 }

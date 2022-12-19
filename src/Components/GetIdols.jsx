@@ -3,17 +3,11 @@ import { CreateInput } from "../Context/CreateInp";
 import classes from "./GetIdols.module.css";
 import Card from "./Card";
 import { Button } from "react-bootstrap";
+
+import App from "../App";
 function GetIdols(props) {
-	const {
-		input,
-		setInput,
-		setObj,
-		obj,
-		toggle,
-		showField,
-		arrayObj,
-		setArrayObj,
-	} = useContext(CreateInput);
+	const { input, setInput, setObj, obj, toggle, showField } =
+		useContext(CreateInput);
 
 	const options = {
 		method: "GET",
@@ -23,7 +17,13 @@ function GetIdols(props) {
 		},
 	};
 
-	const search = () => {
+	const keyPressSearch = (event) => {
+		if (event.key === "Enter") {
+			search();
+		}
+	};
+
+	const search = (event) => {
 		fetch(
 			`https://k-pop.p.rapidapi.com/idols?q=${input}&by=Stage%20Name`,
 			options
@@ -33,37 +33,44 @@ function GetIdols(props) {
 				console.log(data);
 				setInput("");
 				setObj(data);
+				if (obj.count === 0) {
+					alert("Could not find idol");
+				}
 				toggle();
 			})
 			.catch((err) => console.log(err));
 	};
 
 	return (
-		<div className="content__container">
-			<div className={classes.container__input}>
-				<label>Get Idol</label>
-				<input
-					type="text"
-					value={props.value}
-					onChange={props.handleClick}
-				/>
-				<Button  onClick={search}>Search</Button >
-			</div>
+		<>
+			<div className={classes.content__container}>
+				<h1 className={classes["hover-underline-animation"]}>Idol finder</h1>
+				<div className={classes.container__input}>
+					<label>Get Idol</label>
+					<input
+						type="text"
+						value={props.value}
+						onChange={props.handleClick}
+						onKeyDown={keyPressSearch}
+					/>
+					<Button onClick={search}>Search</Button>
+				</div>
 
+				<div className={classes.cards__container}>
+					{showField &&
+						obj.data.map((d, key) => {
+							console.log(d);
+							return (
+									<Card
+										d={d}
+										key={key}
+									/>
+							);
+						})}
+				</div>
 
-			<div className={classes.cards__container}>
-				{showField &&
-					obj.data.map((d, key) => {
-						console.log(d);
-						return (
-							<Card
-								d={d}
-								key={key}
-							/>
-						);
-					})}
 			</div>
-		</div>
+		</>
 	);
 }
 
