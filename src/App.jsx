@@ -5,7 +5,7 @@ import { CreateInput } from "./Context/CreateInp";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Route, Routes } from "react-router-dom";
 
-function App() { 
+function App() {
 	const [input, setInput] = useState("");
 	const [obj, setObj] = useState({});
 	const [showField, setField] = useState(false);
@@ -26,19 +26,11 @@ function App() {
 				<CreateInput.Provider
 					value={{ input, setInput, setObj, obj, toggle, showField }}
 				>
-			<Routes>
-				<Route
-					path="/"
-					element={
-						<GetIdols
-							value={input}
-							handleClick={handleClick}
-							setInput={setInput}
-						/>
-					}
-				/>
-				
-			</Routes>
+					<GetIdols
+						value={input}
+						handleClick={handleClick}
+						setInput={setInput}
+					/>
 				</CreateInput.Provider>
 			</div>
 		</>

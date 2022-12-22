@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 
 function Card(props) {
 	return (
+		
 		<div className={classes["idol__container"]}>
 			<h3>
 				Full Name: {props.d["Full Name"] != null ? props.d["Full Name"] : "N/A"}

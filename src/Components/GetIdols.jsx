@@ -1,10 +1,9 @@
 import React, { useContext } from "react";
 import { CreateInput } from "../Context/CreateInp";
 import classes from "./GetIdols.module.css";
-import Card from "./Card";
 import { Button } from "react-bootstrap";
-
-import App from "../App";
+import IdolList from "./IdolList";
+import { Route, Routes } from "react-router-dom";
 function GetIdols(props) {
 	const { input, setInput, setObj, obj, toggle, showField } =
 		useContext(CreateInput);
@@ -55,20 +54,10 @@ function GetIdols(props) {
 					/>
 					<Button onClick={search}>Search</Button>
 				</div>
-
-				<div className={classes.cards__container}>
-					{showField &&
-						obj.data.map((d, key) => {
-							console.log(d);
-							return (
-									<Card
-										d={d}
-										key={key}
-									/>
-							);
-						})}
-				</div>
-
+				<IdolList
+					showField={showField}
+					obj={obj}
+				/>
 			</div>
 		</>
 	);
